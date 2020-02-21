@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+
+<head>
+<script type="text/javascript" src="lib/jquery.js"></script>
+<meta http-equiv="refresh" content="60;URL=http://172.19.2.25/pantallas/index.php/trm-1" >
+<title>Title Goes Here</title>
+
+</head>
+
+
+<body style="background-image:url('http://172.19.1.49/report/sap/obituario_persona.jpg'); background-repeat:no-repeat; background-size:1920px 1090px;">
+<marquee id="obituarios" direction="up" scrolldelay="200" style="height: 570px; margin-left: 380px; margin-top: 220px; font-size:25px; font-family: sans-serif;"></marquee>
+</body>
+
+<script>
+ $(document).ready(function() {
+         $.ajax({
+            type: "GET",
+            url: 'http://45.163.28.24:8000/OLIVOS_OBITUARIOS/modelo/controller.xsjs?cmd=encu&bd=OLV_BOGOTA&sede=2',
+            data: "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data) {
+                $("#obituarios").html('');               
+                for (var indice in data) {
+                    $("#obituarios").append("</br><h3 style='color: #a0393a;'>Nombre:" + data[indice].nombre_fallecido + "</h3>" +
+                   "</br>Sede:" + data[indice].sede + "</br>" + data[indice].sala + "</br>Exequias:" + data[indice].lugar_exequias + "</br>"+
+                   "Direcci&oacute;n:" + data[indice].direccion_exequias + "</br>Fecha:"+ data[indice].fecha_exequias + "</br>" +
+                   "Hora:" + data[indice].hora_exequias + "</br>Cementerio:"+ data[indice].destino_final + "</br>" + "Direcci&oacute;n:"+ data[indice].direccion_cementerio + "</br>");
+                 //console.log("En el índice '" + indice + "' hay este valor: " + data[indice].fallecido);
+                }
+            }
+          });
+        }); 
+</script>
+</html>
